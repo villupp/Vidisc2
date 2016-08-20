@@ -23,7 +23,7 @@ namespace Vidisc2.Migrations
 
                     b.Property<DateTime>("CreatedAt");
 
-                    b.Property<string>("Holes")
+                    b.Property<string>("HolesStr")
                         .IsRequired();
 
                     b.Property<string>("Location");
@@ -56,8 +56,7 @@ namespace Vidisc2.Migrations
                     b.Property<int>("RoundId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("CourseId")
-                        .IsRequired();
+                    b.Property<int>("CourseId");
 
                     b.Property<DateTime>("CreatedAt");
 
@@ -73,11 +72,9 @@ namespace Vidisc2.Migrations
                     b.Property<int>("ScorecardId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("PlayerId")
-                        .IsRequired();
+                    b.Property<int>("PlayerId");
 
-                    b.Property<int?>("RoundId")
-                        .IsRequired();
+                    b.Property<int>("RoundId");
 
                     b.Property<string>("ScoreSet")
                         .IsRequired();

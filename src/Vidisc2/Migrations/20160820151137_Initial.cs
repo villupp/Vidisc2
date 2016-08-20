@@ -10,7 +10,7 @@ namespace Vidisc2.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Course",
+                name: "Courses",
                 columns: table => new
                 {
                     CourseId = table.Column<int>(nullable: false)
@@ -22,11 +22,11 @@ namespace Vidisc2.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Course", x => x.CourseId);
+                    table.PrimaryKey("PK_Courses", x => x.CourseId);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Player",
+                name: "Players",
                 columns: table => new
                 {
                     PlayerId = table.Column<int>(nullable: false)
@@ -36,7 +36,7 @@ namespace Vidisc2.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Player", x => x.PlayerId);
+                    table.PrimaryKey("PK_Players", x => x.PlayerId);
                 });
 
             migrationBuilder.CreateTable(
@@ -52,15 +52,15 @@ namespace Vidisc2.Migrations
                 {
                     table.PrimaryKey("PK_Rounds", x => x.RoundId);
                     table.ForeignKey(
-                        name: "FK_Rounds_Course_CourseId",
+                        name: "FK_Rounds_Courses_CourseId",
                         column: x => x.CourseId,
-                        principalTable: "Course",
+                        principalTable: "Courses",
                         principalColumn: "CourseId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Scorecard",
+                name: "Scorecards",
                 columns: table => new
                 {
                     ScorecardId = table.Column<int>(nullable: false)
@@ -71,15 +71,15 @@ namespace Vidisc2.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Scorecard", x => x.ScorecardId);
+                    table.PrimaryKey("PK_Scorecards", x => x.ScorecardId);
                     table.ForeignKey(
-                        name: "FK_Scorecard_Player_PlayerId",
+                        name: "FK_Scorecards_Players_PlayerId",
                         column: x => x.PlayerId,
-                        principalTable: "Player",
+                        principalTable: "Players",
                         principalColumn: "PlayerId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Scorecard_Rounds_RoundId",
+                        name: "FK_Scorecards_Rounds_RoundId",
                         column: x => x.RoundId,
                         principalTable: "Rounds",
                         principalColumn: "RoundId",
@@ -92,29 +92,29 @@ namespace Vidisc2.Migrations
                 column: "CourseId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Scorecard_PlayerId",
-                table: "Scorecard",
+                name: "IX_Scorecards_PlayerId",
+                table: "Scorecards",
                 column: "PlayerId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Scorecard_RoundId",
-                table: "Scorecard",
+                name: "IX_Scorecards_RoundId",
+                table: "Scorecards",
                 column: "RoundId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Scorecard");
+                name: "Scorecards");
 
             migrationBuilder.DropTable(
-                name: "Player");
+                name: "Players");
 
             migrationBuilder.DropTable(
                 name: "Rounds");
 
             migrationBuilder.DropTable(
-                name: "Course");
+                name: "Courses");
         }
     }
 }

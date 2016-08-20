@@ -8,8 +8,8 @@ using Vidisc2.Data;
 namespace Vidisc2.Migrations
 {
     [DbContext(typeof(DgContext))]
-    [Migration("20160820144738_DbSets")]
-    partial class DbSets
+    [Migration("20160820160708_Initial2")]
+    partial class Initial2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -24,7 +24,7 @@ namespace Vidisc2.Migrations
 
                     b.Property<DateTime>("CreatedAt");
 
-                    b.Property<string>("Holes")
+                    b.Property<string>("HolesStr")
                         .IsRequired();
 
                     b.Property<string>("Location");
@@ -57,8 +57,7 @@ namespace Vidisc2.Migrations
                     b.Property<int>("RoundId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("CourseId")
-                        .IsRequired();
+                    b.Property<int>("CourseId");
 
                     b.Property<DateTime>("CreatedAt");
 
@@ -74,11 +73,9 @@ namespace Vidisc2.Migrations
                     b.Property<int>("ScorecardId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("PlayerId")
-                        .IsRequired();
+                    b.Property<int>("PlayerId");
 
-                    b.Property<int?>("RoundId")
-                        .IsRequired();
+                    b.Property<int>("RoundId");
 
                     b.Property<string>("ScoreSet")
                         .IsRequired();

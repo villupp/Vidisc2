@@ -43,6 +43,10 @@ namespace Vidisc2
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
+            Utils.Logger = loggerFactory.CreateLogger<Program>();
+
+            Utils.Logger.LogInformation("Logger initialized.");
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

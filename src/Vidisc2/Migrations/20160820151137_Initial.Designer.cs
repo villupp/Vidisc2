@@ -8,7 +8,7 @@ using Vidisc2.Data;
 namespace Vidisc2.Migrations
 {
     [DbContext(typeof(DgContext))]
-    [Migration("20160820144051_Initial")]
+    [Migration("20160820151137_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -34,7 +34,7 @@ namespace Vidisc2.Migrations
 
                     b.HasKey("CourseId");
 
-                    b.ToTable("Course");
+                    b.ToTable("Courses");
                 });
 
             modelBuilder.Entity("Vidisc2.Models.Player", b =>
@@ -49,7 +49,7 @@ namespace Vidisc2.Migrations
 
                     b.HasKey("PlayerId");
 
-                    b.ToTable("Player");
+                    b.ToTable("Players");
                 });
 
             modelBuilder.Entity("Vidisc2.Models.Round", b =>
@@ -57,8 +57,7 @@ namespace Vidisc2.Migrations
                     b.Property<int>("RoundId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("CourseId")
-                        .IsRequired();
+                    b.Property<int>("CourseId");
 
                     b.Property<DateTime>("CreatedAt");
 
@@ -76,8 +75,7 @@ namespace Vidisc2.Migrations
 
                     b.Property<int>("PlayerId");
 
-                    b.Property<int?>("RoundId")
-                        .IsRequired();
+                    b.Property<int>("RoundId");
 
                     b.Property<string>("ScoreSet")
                         .IsRequired();
@@ -88,7 +86,7 @@ namespace Vidisc2.Migrations
 
                     b.HasIndex("RoundId");
 
-                    b.ToTable("Scorecard");
+                    b.ToTable("Scorecards");
                 });
 
             modelBuilder.Entity("Vidisc2.Models.Round", b =>
