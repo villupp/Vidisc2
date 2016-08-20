@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Vidisc2.Data;
 
 namespace Vidisc2
 {
@@ -28,7 +26,15 @@ namespace Vidisc2
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
-            services.AddMvc();
+
+            // Entity framework
+            var connection = @"Server=(localdb)\mssqllocaldb;Database=discgolf;Trusted_Connection=True;";
+            services.AddDbContext<DgContext>(options => options.UseSqlServer(connection));
+            
+            // MVC framework
+            services.AddMvc()
+                // Data annotations
+                .AddDataAnnotationsLocalization(); ;
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
