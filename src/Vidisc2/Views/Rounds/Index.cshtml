@@ -1,0 +1,26 @@
+﻿@model IEnumerable<Vidisc2.Models.Round>
+
+@{
+    ViewBag.Title = "Rounds";
+}
+
+<h2>Rounds</h2>
+
+<table class="table">
+    <tr>
+        <th>Created at</th>
+        <th>ID</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedAt)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RoundId)
+            </td>
+        </tr>
+    }
+</table>

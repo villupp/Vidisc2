@@ -1,0 +1,32 @@
+﻿@model Vidisc2.Models.Player
+
+<h3>Are you sure you want to delete the player?</h3>
+<hr />
+<div>
+    <table>
+        <tr>
+            <th>ID:&nbsp;</th>
+            <td>@Model.PlayerId</td>
+        </tr>
+        <tr>
+            <th>Name:&nbsp;</th>
+            <td>@Model.Name</td>
+        </tr>
+        <tr>
+            <th>Created at:&nbsp;</th>
+            <td>@Model.CreatedAt</td>
+        </tr>
+        
+    </table>
+</div>
+<hr />
+<div>
+    <form asp-controller="Players" asp-action="Delete" asp-route-id="@Model.PlayerId" method="post" class="form-horizontal" role="form">
+        <div class="form-horizontal">
+            <div class="form-actions no-color">
+                <input type="submit" value="Delete" class="btn btn-danger" /> or 
+                <a asp-area="" asp-controller="Players" asp-action="Index">go back to player list</a>
+            </div>
+        </div>
+    </form>
+</div>
