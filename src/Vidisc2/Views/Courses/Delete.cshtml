@@ -1,0 +1,36 @@
+﻿@model Vidisc2.Models.Course
+
+<h3>Are you sure you want to delete the course?</h3>
+<hr />
+<div>
+    <table>
+        <tr>
+            <th>ID:&nbsp;</th>
+            <td>@Model.CourseId</td>
+        </tr>
+        <tr>
+            <th>Name:&nbsp;</th>
+            <td>@Model.Name</td>
+        </tr>
+        <tr>
+            <th>Created at:&nbsp;</th>
+            <td>@Model.Location</td>
+        </tr>
+        <tr>
+            <th>Hole count:&nbsp;</th>
+            <td>@Model.Holes.Count</td>
+        </tr>
+        
+    </table>
+</div>
+<hr />
+<div>
+    <form asp-controller="Courses" asp-action="Delete" asp-route-id="@Model.CourseId" method="post" class="form-horizontal" role="form">
+        <div class="form-horizontal">
+            <div class="form-actions no-color">
+                <input type="submit" value="Delete" class="btn btn-danger" /> or 
+                <a asp-area="" asp-controller="Courses" asp-action="Index">go back to course list</a>
+            </div>
+        </div>
+    </form>
+</div>

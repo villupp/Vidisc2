@@ -1,0 +1,110 @@
+﻿@model Vidisc2.Models.Course
+
+@{
+    ViewBag.Title = "New course";
+    ViewBag.MaxHoleCount = 30;
+    ViewBag.holeCssIdPrefix = "hole-row-";
+}
+
+<script type="text/javascript">
+    var holeCssIdPrefix = "@ViewBag.holeCssIdPrefix";
+
+    $(document).ready(function() {
+        $('#hole-count').on('change', function (e) {
+            var optionSelected = $("option:selected", this);
+            var valueSelected = this.value;
+            showHoleFields(valueSelected);
+        });
+
+        showHoleFields(1);
+    });
+
+    function showHoleFields(holeCount) {
+        holeCount = parseInt(holeCount);
+        console.log("holecount: " + holeCount);
+
+        for (var i = 1; i <= holeCount; i++) {
+            $("#" + holeCssIdPrefix + i).show();
+        }
+
+        for (var i = holeCount + 1; i <= @ViewBag.MaxHoleCount; i++) {
+            $('#hole-par-' + i).val('');
+            $('#hole-length-' + i).val('');
+            $('#' + holeCssIdPrefix + '' + i).hide();
+        }
+    }
+</script>
+
+<style>
+    .hole-cell {
+        padding: 5px;
+    }
+
+    }
+</style>
+
+<h2>@ViewData["Title"]</h2>
+
+<form asp-controller="Courses" asp-action="Create" method="post" class="form-horizontal" role="form">
+    <div class="form-horizontal">
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <div class="form-group">
+            <hr />
+
+            <h3>Course details</h3>
+
+            <label asp-for="Name" class="control-label"></label>
+            <div class="">
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <label asp-for="Location" class="control-label"></label>
+            <div class="">
+                <input asp-for="Location" class="form-control" />
+                <span asp-validation-for="Location" class="text-danger"></span>
+            </div>
+            <label for="hole-count" class="control-label">Hole count</label>
+            <div class="">
+                <select id="hole-count" for="hole-count" class="form-control">
+                    @for (int i = 1; i <= ViewBag.MaxHoleCount; i++)
+                    {
+                        <option value="@i" title="@i">@i</option>
+                    }
+                </select>
+            </div>
+
+            <hr/>
+
+            <h3>Holes</h3>
+            <table>
+                <tbody>
+                    <tr>
+                        <th class="hole-cell hole-cell-header">Hole</th>
+                        <th class="hole-cell hole-cell-header">Par</th>
+                        <th class="hole-cell hole-cell-header">Length (m)</th>
+                    </tr>
+                    @for (int i = 1; i <= ViewBag.MaxHoleCount; i++)
+                    {
+                        <tr id="@ViewBag.HoleCssIdPrefix@i" class="hole-row">
+                            <th class="hole-cell hole-cell-header">
+                                <label for="@i" class="col-md-1 control-label">@i</label>
+                            </th>
+                            <td class="hole-cell">
+                                <input class="col-md-2 form-control hole-input input-par" id="hole-par-@i" type="text" value="" required />
+                            </td>
+                            <td class="hole-cell">
+                                <input class="col-md-2 form-control hole-input input-length" id="hole-length-@i" type="text" value="" />
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <hr />
+        </div>
+        <div class="form-group">
+            <div class="col-md-3">
+                <input type="submit" value="Create" class="btn btn-success btn-block" />
+            </div>
+        </div>
+    </div>
+</form>

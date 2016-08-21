@@ -8,11 +8,11 @@ using Vidisc2.Models;
 
 namespace Vidisc2.Controllers
 {
-    public class PlayersController : Controller
+    public class CoursesController : Controller
     {
         private DgContext _context;
 
-        public PlayersController(DgContext context)
+        public CoursesController(DgContext context)
         {
             _context = context;
         }
@@ -20,7 +20,7 @@ namespace Vidisc2.Controllers
         // GET: /<controller>/
         public IActionResult Index()
         {
-            return View(_context.Players.ToList());
+            return View(_context.Courses.ToList());
         }
 
         public IActionResult Create()
@@ -30,45 +30,45 @@ namespace Vidisc2.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Player player)
+        public IActionResult Create(Course course)
         {
             if (ModelState.IsValid)
             {
-                player.CreatedAt = DateTime.UtcNow;
-                _context.Players.Add(player);
+                course.CreatedAt = DateTime.UtcNow;
+                _context.Courses.Add(course);
                 _context.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(player);
+            return View(course);
         }
 
-        // GET: /Players/Delete/2
+        // GET: /Courses/Delete/2
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new BadRequestResult();
             }
-            Player player = _context.Players.Where(p => p.PlayerId == id).FirstOrDefault();
-            if (player == null)
+            Course course = _context.Courses.Where(c => c.CourseId == id).FirstOrDefault();
+            if (course == null)
             {
                 return new NotFoundResult();
             }
-            return View(player);
+            return View(course);
         }
 
-        // POST: /Players/Delete/2
+        // POST: /Courses/Delete/2
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Player player = _context.Players.Where(p => p.PlayerId == id).FirstOrDefault();
-            if (player != null)
+            Course course = _context.Courses.Where(c => c.CourseId == id).FirstOrDefault();
+            if (course != null)
             {
-                _context.Players.Remove(player);
+                _context.Courses.Remove(course);
                 _context.SaveChanges();
-            }            
+            }
             return RedirectToAction("Index");
         }
     }

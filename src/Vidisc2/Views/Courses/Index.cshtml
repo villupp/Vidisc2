@@ -1,0 +1,44 @@
+﻿@model IEnumerable<Vidisc2.Models.Course>
+
+@{
+    ViewBag.Title = "Courses";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<p>
+    <a asp-controller="Courses" asp-action="Create">Create New</a>
+</p>
+
+<table class="table">
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Created at</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CourseId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Location)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedAt)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Holes.Count)
+            </td>
+            <td>
+                <a asp-area="" asp-controller="Courses" asp-action="Delete" asp-route-id="@item.CourseId">
+                    <span class="glyphicon glyphicon-trash"></span>
+                </a>
+                
+            </td>
+            
+        </tr>
+    }
+</table>
