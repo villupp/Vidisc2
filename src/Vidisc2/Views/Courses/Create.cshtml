@@ -3,49 +3,22 @@
 @{
     ViewBag.Title = "New course";
     ViewBag.MaxHoleCount = 30;
-    ViewBag.holeCssIdPrefix = "hole-row-";
 }
 
-<script type="text/javascript">
-    var holeCssIdPrefix = "@ViewBag.holeCssIdPrefix";
-
-    $(document).ready(function() {
-        $('#hole-count').on('change', function (e) {
-            var optionSelected = $("option:selected", this);
-            var valueSelected = this.value;
-            showHoleFields(valueSelected);
-        });
-
-        showHoleFields(1);
-    });
-
-    function showHoleFields(holeCount) {
-        holeCount = parseInt(holeCount);
-        console.log("holecount: " + holeCount);
-
-        for (var i = 1; i <= holeCount; i++) {
-            $("#" + holeCssIdPrefix + i).show();
-        }
-
-        for (var i = holeCount + 1; i <= @ViewBag.MaxHoleCount; i++) {
-            $('#hole-par-' + i).val('');
-            $('#hole-length-' + i).val('');
-            $('#' + holeCssIdPrefix + '' + i).hide();
-        }
-    }
-</script>
+<script src="~/js/courses.js" asp-append-version="true"></script>
 
 <style>
     .hole-cell {
         padding: 5px;
     }
-
+    .hole-row {
+        display: none;
     }
 </style>
 
 <h2>@ViewData["Title"]</h2>
 
-<form asp-controller="Courses" asp-action="Create" method="post" class="form-horizontal" role="form">
+<form id="course-create-form" asp-controller="Courses" asp-action="Create" method="post" class="form-horizontal" role="form" onsubmit="courses.createAndAssignCoursesString()">
     <div class="form-horizontal">
         <div asp-validation-summary="All" class="text-danger"></div>
         <div class="form-group">
@@ -62,6 +35,10 @@
             <div class="">
                 <input asp-for="Location" class="form-control" />
                 <span asp-validation-for="Location" class="text-danger"></span>
+            </div>
+            <div class="">
+                <input id="course-holes-str" asp-for="HolesStr" class="form-control" type="hidden" />
+                <span asp-validation-for="HolesStr" class="text-danger"></span>
             </div>
             <label for="hole-count" class="control-label">Hole count</label>
             <div class="">
@@ -103,7 +80,7 @@
         </div>
         <div class="form-group">
             <div class="col-md-3">
-                <input type="submit" value="Create" class="btn btn-success btn-block" />
+                <input id="course-create-submit" type="submit" value="Create" class="btn btn-success btn-block" />
             </div>
         </div>
     </div>

@@ -22,7 +22,6 @@ namespace Vidisc2.Models
     public class Course
     {
         public int CourseId { get; set; }
-        [Required]
         [EditorBrowsable(EditorBrowsableState.Never)]
         [ScaffoldColumn(false)]
         public string HolesStr { get; set; }
@@ -42,10 +41,10 @@ namespace Vidisc2.Models
                 try
                 {
                     // split to par,length
-                    string[] holeStrs = this.HolesStr.Split(';');
+                    string[] holeStrs = this.HolesStr.Split('|');
                     foreach(string holeStr in holeStrs)
                     {
-                        string[] holeStrParts = holeStr.Split(',');
+                        string[] holeStrParts = holeStr.Split(';');
                         if (!string.IsNullOrEmpty(holeStrParts[0])
                             && !string.IsNullOrEmpty(holeStrParts[0]))
                         {
@@ -67,7 +66,7 @@ namespace Vidisc2.Models
                 string retStr = "";
                 foreach (Hole hole in value)
                 {
-                    retStr += hole.Par + "," + hole.Length + ";";
+                    retStr += hole.Par + ";" + hole.Length + "|";
                 }
 
                 this.HolesStr = retStr;
