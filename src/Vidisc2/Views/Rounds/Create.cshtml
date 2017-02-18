@@ -1,0 +1,64 @@
+﻿@model Vidisc2.Models.Round
+
+@{
+    ViewBag.Title = "Play";
+    ViewBag.MaxPlayerCount = 15;
+}
+
+<script src="~/js/rounds.js" type="text/javascript"></script>
+<style>
+    .delete-player:hover {
+        cursor: pointer;
+    }
+</style>
+
+<h2>@ViewData["Title"]</h2>
+
+<form id="course-create-form" asp-controller="Rounds" asp-action="Create" method="post" class="form-horizontal" role="form">
+    <div class="form-horizontal">
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <div class="form-group">
+            
+            <hr />
+
+            <select id="course-select" class="form-control">
+                <option value="0">Select course</option>
+                @foreach (var course in ViewData["Courses"] as List<Vidisc2.Models.Course>)
+                {
+                    <option class="course-option" value="@course.CourseId">@course.Name</option>
+                }
+            </select>
+
+            <hr />
+
+            <select id="player-select" class="form-control">
+                <option value="0">Add player</option>
+                @foreach (var player in ViewData["Players"] as List<Vidisc2.Models.Player>)
+                {
+                    <option class="player-option" value="@player.PlayerId">@player.Name</option>
+                }
+            </select>
+
+            <hr/>
+
+            <h3>Players</h3>
+            
+            <table id="player-list">
+
+            </table>
+
+            <hr />
+        </div>
+        
+        <div class="">
+            <input id="round-players-str" asp-for="PlayerIdsStr" class="form-control" type="hidden" />
+            <span asp-validation-for="PlayerIdsStr" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-3">
+                <input id="round-create-submit" type="submit" value="Start!" class="btn btn-success btn-block" />
+            </div>
+        </div>
+    </div>
+</form>

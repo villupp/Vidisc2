@@ -27,6 +27,8 @@ namespace Vidisc2.Controllers
 
         public IActionResult Create()
         {
+            ViewData["Courses"] = _context.Courses.ToList();
+            ViewData["Players"] = _context.Players.ToList();
             return View();
         }
 

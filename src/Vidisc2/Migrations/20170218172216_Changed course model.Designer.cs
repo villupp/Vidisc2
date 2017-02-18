@@ -8,9 +8,10 @@ using Vidisc2.Data;
 namespace Vidisc2.Migrations
 {
     [DbContext(typeof(DgContext))]
-    partial class DgContextModelSnapshot : ModelSnapshot
+    [Migration("20170218172216_Changed course model")]
+    partial class Changedcoursemodel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.0-rtm-22752")
